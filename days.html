@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+        class ExtendedDate extends Date {
+            constructor(day2, month2) {
+                super();
+                this.day = this.getDate();
+                this.month = this.getMonth();
+                this.day2 = day2;
+                this.month2 = month2;
+            }
+
+            Print() {
+                document.write("Day - " + this.day + "</br>");
+                document.write("Month - " + this.month + "</br>");
+            }
+
+            CheckDAte() {
+                if (this.month > this.month2) {
+                    return false;
+                }
+                else if (this.month < this.month2) {
+                    return true;
+                }
+                else if (this.month == this.month2) {
+                    if (this.day > this.day2) {
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+            }
+
+            IsLeapYear() {
+                let year = this.getFullYear();
+                return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+            }
+
+            NextDate() {
+                let nextDate = new ExtendedDate(this.day, this.month);
+                nextDate.setDate(nextDate.getDate() + 1);
+                return nextDate;
+            }
+
+
+        }
+        let day = prompt("Enter day ");
+        let month = prompt("Enter month ");
+        let obj1 = new ExtendedDate(day, month);
+        obj1.Print();
+        let check = obj1.CheckDAte();
+        if (check == false) {
+            document.write(day + "." + month + " - past date ! ");
+        }
+        else {
+            document.write(day + "." + month + " - Future or Now date !");
+        }
+
+        if (obj1.IsLeapYear()) {
+            document.write("<br>Leap year");
+        } else {
+            document.write("<br> Not Leap year");
+        }
+
+        let nextDate = obj1.NextDate();
+        document.write("<br>Next date:  " + nextDate.getDate() + "." + nextDate.getMonth());
+
+    </script>
+</body>
+
+</html>
